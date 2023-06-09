@@ -33,15 +33,40 @@ There are definitely important tradeoffs here -- images that are too big take ex
 ### Image augmentations
 I applied different additional image augmentations in `get_bird_data`, combining them (with the image resizing) using `transforms.Compose`. 
 
+I used size 256x256 for all of these, after having decided a good size from the above tests.
 
+| Augmentations      | Test accuracy |
+| ----------- | ----------- |
+| RandomCrop, RandomHorizontalFlip      | 0.6395       |
+| RandomCrop, RandomHorizontalFlip, RandomVerticalFlip      | 0.6055       |
+| RandomCrop, RandomHorizontalFlip, RandomVerticalFlip, RandomPerspective      | 0.5345       |
+| RandomCrop, RandomHorizontalFlip, RandomVerticalFlip, RandomPerspective      | 0.5345       |
+| RandomCrop, RandomHorizontalFlip, RandomVerticalFlip, RandomRotation, RandomPerspective, RandomAutocontrast, ColorJitter      | 0.6395     |
 
-So, image augmentation can be a powerful tool to prevent overfitting, but too much of it can also corrupt the images so much that the model can't learn the right things from them anymore. Using just a small number of augmentations that didn't change the images too much was ideal.
+Image augmentation can be a powerful tool to prevent overfitting, but too much of it can also corrupt the images so much that the model can't learn the right things from them anymore. With my tests, the best choice ended up being just a small number of augmentations that didn't change the images too much. I would like to try more augmentations that are less extreme transformations in the future, however. Some of the augmentations I tried may have changed the images too much, like RandomPerspective and RandomAutocontrast. I could also try reducing the range for those augmentations.
 
 ### Hyperparameter tuning
-#### Learning rate
-Momentum
-Decay
-#### More epochs
+
+Previous examples above all trained for 5 epochs with learning rate .1, momentum .9, and decay .0005 (default values for momentum and decay). But selecting good hyperparameters is important. Training with good hyperparameters for different epochs also matters -- what learning rate should you use in the beginning vs. near the end? I played around with the number of epochs, and the learning rate, momentum, and decay, changing them for different stages of epochs.
+
+These were all using size 256x256 images and the RandomCrop, RandomHorizontalFlip, and RandomVerticalFlip augmentations as determined to be the best from the previous section.
+
+| Learning rate | Momentum | Decay      | Test accuracy |
+| ----------- | ----------- | --- | --- |
+| .1 to epoch 5, .01 to epoch 8, .001 to epoch 10, .0001 to epoch 12 | .9 | .0005      | 0.7865       |
+| .1 to epoch 5, .01 to epoch 8, .001 to epoch 10, .0001 to epoch 12 | .9 to epoch 5, .75 to epoch 12, | .0005       | 0.79       |
+| .1 to epoch 5, .01 to epoch 8, .001 to epoch 10, .0001 to epoch 12 | .9 to epoch 5, .5 to epoch 10, .1 to epoch 12 | .0005     | 0.7875       |
+| .1 to epoch 5, .01 to epoch 8, .001 to epoch 10, .0001 to epoch 12 | .9 to epoch 5, .5 to epoch 10, .1 to epoch 12 | 0    | 0.7925       |
+| .1 to epoch 5, .01 to epoch 8, .001 to epoch 10, .0001 to epoch 16 | .9 to epoch 5, .5 to epoch 10, .1 to epoch 16 | 0    | 0.794       |
+
+Here is a plot of the losses for the final model in the table, with the best accuracy 0.794:
+![image](https://github.com/marg33/bird-classification/assets/44858702/9c55fa84-05a4-44a2-b23f-2549e143e818)
+
+Here is one for the second to last model in the table, with the second best accuracy 0.7925:
+![image](https://github.com/marg33/bird-classification/assets/44858702/83294138-6ee4-42b3-ace8-a76f70e07a89)
+
+I ran a bunch of different tests to get to these results
+
 
 ## Additional discussion
 
