@@ -37,7 +37,7 @@ I used size 256x256 for all of these, after having decided a good size from the 
 
 | Augmentations      | Test accuracy |
 | ----------- | ----------- |
-| RandomCrop, RandomHorizontalFlip      | 0.6395       |
+| RandomCrop, RandomHorizontalFlip      | 0.687       |
 | RandomCrop, RandomHorizontalFlip, RandomVerticalFlip      | 0.6055       |
 | RandomCrop, RandomHorizontalFlip, RandomVerticalFlip, RandomPerspective      | 0.5345       |
 | RandomCrop, RandomHorizontalFlip, RandomVerticalFlip, RandomPerspective      | 0.5345       |
