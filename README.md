@@ -13,7 +13,7 @@ Pretraining is really powerful: ResNet-18's default PyTorch weights are from tra
 "The data is images. Of birds." The train and test data were provided in the Kaggle competition. There are 555 names of birds, or classes. For each bird name, there is a directory of training images for it, so we can give the model numerous examples for each class it should identify. 
 
 ## My approach, and results
-My approach was to first get a large pretrained model (ResNet-18), then finetune it with the training data for this task. The finetuning was done with sotchastic gradient descent to optimize cross-entropy loss. I tried different approaches for improving the finetuning process, including image augmentations, resizing training images, and hyperparameter tuning, and found they could make a big (and sometimes surprising) difference. I used ideas I had learned from class along with other approaches I read about.
+My approach was to first get a large pretrained model (ResNet-18), then finetune it with the training data for this task. The finetuning was done with stochastic gradient descent to optimize cross-entropy loss. I tried different approaches for improving the finetuning process, including image augmentations, resizing training images, and hyperparameter tuning, and found they could make a big (and sometimes surprising) difference. I used ideas I had learned from class along with other approaches I read about.
 
 ### Resizing the images
 I had to preprocess the data before training and prediction, and this included resizing the images. In the `get_bird_data` function, I resize the images to the same size. I tried sizes of 128x128, 256x256, and 512x512. Images of size 256x256 led to better performance than 128x128 and 512x512. 
