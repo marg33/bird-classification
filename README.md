@@ -43,7 +43,9 @@ I used size 256x256 for all of these, after having decided a good size from the 
 | RandomCrop, RandomHorizontalFlip, RandomVerticalFlip, RandomPerspective      | 0.5345       |
 | RandomCrop, RandomHorizontalFlip, RandomVerticalFlip, RandomRotation, RandomPerspective, RandomAutocontrast, ColorJitter      | 0.6395     |
 
-Image augmentation can be a powerful tool to prevent overfitting, but too much of it can also corrupt the images so much that the model can't learn the right things from them anymore. With my tests, the best choice ended up being just a small number of augmentations that didn't change the images too much. I would like to try more augmentations that are less extreme transformations in the future, however. Some of the augmentations I tried may have changed the images too much, like RandomPerspective and RandomAutocontrast. I could also try reducing the range for those augmentations.
+Image augmentation can be a powerful tool to prevent overfitting, but too much of it can also corrupt the images so much that the model can't learn the right things from them anymore. With my tests, the best choice ended up being just a small number of augmentations that didn't change the images too much, that is, the first test in the table, which achieved an accuracy of 0.687. The last test in the table, of using a large number of augmentations, had the second highest accuracy of 0.6395, but it was still worse than the simple augmentations. A better selection of augmentations may have beaten it out, though.
+
+Augmentations are still promising, and as seen in the next section, overfitting to training data may have been an issue, and they would help to reduce that. I would like to try more varied augmentations that are less extreme transformations in the future. Some of the augmentations I tried may have changed the images too much, like RandomPerspective. I could also try reducing the range for those augmentations.
 
 ### Hyperparameter tuning
 
