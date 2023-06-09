@@ -14,12 +14,15 @@ My code was based on [tutorial 3](https://colab.research.google.com/drive/1EBz4f
 My approach was to first get a large pretrained model (ResNet-18), then finetune it with the training data for this task. I tried different approaches for improving the finetuning process, including image augmentations, resizing training images, and hyperparameter tuning, and found they could make a big (and sometimes surprising) difference. I used ideas I had learned from class along with other approaches I read about.
 
 ### Resizing the images
-I had to preprocess the data before training and prediction, and this included resizing the images. In the `get_bird_data` function, I resize the images to the same size. I tried 
+I had to preprocess the data before training and prediction, and this included resizing the images. In the `get_bird_data` function, I resize the images to the same size. I tried sizes of 64x64, 128x128, 256x256, and 512x512. 
 
 ### Image augmentations
 I applied different additional image augmentations in `get_bird_data`, combining them along with the image resizing using `transforms.Compose`.
 
 ### Hyperparameter tuning
-I
+#### Learning rate
+Momentum
+Decay
+#### More epochs
 
 ## Additional discussion
